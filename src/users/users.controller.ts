@@ -8,17 +8,20 @@ import {
   Post,
   Query,
 } from "@nestjs/common";
+import { UsersService } from "./users.service";
 
 @Controller("users") // /users
 export class UsersController {
+
+  constructor(private readonly usersService: UsersService) { }
   @Get() //GET /users or /users?role=value
   findAll(@Query("role") role?: "INTERN" | "ENGINEER" | "ADMIN") {
-    return [];
+    return this.usersService.findAll(role);
   }
 
   @Get(":id") //GET /users/:id
   findOne(@Param("id") id: string) {
-    return { id };
+    return this.usersService.findOne(+id);
   }
 
   @Post() // Post /users
@@ -33,6 +36,6 @@ export class UsersController {
 
   @Delete(":id") //Delete /users/:id
   delete(@Param("id") id: string) {
-    return { id };
+    return this.usersService.delete(+id);
   }
 }
