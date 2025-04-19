@@ -57,10 +57,10 @@ export class UsersService {
         return newUser;
     }
 
-    update(id: number, updatedUser: ) {
+    update(id: number, updateUserDto: UpdateUserDto) {
         this.users = this.users.map(user => {
             if (user.id === id) {
-                return { ...user, ...updatedUser }
+                return { ...user, ...updateUserDto }
             }
             return user;
         })
